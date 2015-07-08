@@ -1,0 +1,6 @@
+#! /bin/sh
+rm -rf bower_components node_modules
+npm install -g gulp
+npm install -g bower
+npm install && bower install
+gulp build

@@ -1,0 +1,11 @@
+node_modules
+dist
+.tmp
+.sass-cache
+bower_components
+build-test
+build-dev
+build
+tmp/
+.DS_Store
+**/.DS_Store
