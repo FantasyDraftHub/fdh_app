@@ -1,24 +1,32 @@
-<!doctype html>
-<html class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <title>Fantasy Draft Hub</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+<!DOCTYPE html>
+<html class="transition-navbar-scroll top-navbar-xlarge bottom-footer" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Fantasy Draft Hub</title>
+
 
     <link rel="stylesheet" href="css/vendor.css">
     <link rel="stylesheet" href="css/app.css">
 
-    <!-- testCss:css -->
-    <!-- endinject -->
-  </head>
-  <body ng-app="fantasyDraftHub">
-    <!--[if lt IE 7]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-      your browser</a> to improve your experience.</p>
-    <![endif]-->
 
-    <ui-view></ui-view>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body ng-app="fantasyDraftHub">
+
+  <ui-view></ui-view>
 
     <script src="js/vendor.js"></script>
     <script src="js/app.js"></script>
@@ -26,7 +34,5 @@
     <!-- inject:js -->
     <!-- endinject -->
 
-    <!-- testJs:js -->
-    <!-- endinject -->
-  </body>
+</body>
 </html>

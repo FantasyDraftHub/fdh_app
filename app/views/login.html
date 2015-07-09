@@ -1,0 +1,29 @@
+<div class="container container-login">
+  <div class="row">
+    <div class="col-xs-12 dark-login-logo"></div>
+  </div>
+  <div class="panel panel-default panel-login">
+    <div class="panel-heading">
+      <h3 class="panel-title">Fantasy Draft Hub Login</h3>
+    </div>
+    <div class="panel-body">
+      <form class="form form-login" ng-submit="login(creds)">
+        <div flash-message="5000" ></div>
+        <p class="login-status">{{loginStatus}}</p>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span>
+          <input type="text" class="form-control" placeholder="Username" ng-model="creds.email" id="email">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-lock"></i></span>
+          <input type="password" class="form-control" placeholder="Password" ng-model="creds.password" id="password">
+        </div>
+        <div class="text-right toolbar">
+          <input type="submit" class="btn btn-primary btn-block" value="Sign In" />
+        </div>
+      </form>
+
+      <a ui-sref="forgotPassword">Reset Password</a>
+    </div>
+  </div>
+</div>

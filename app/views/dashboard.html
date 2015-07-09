@@ -1,0 +1,55 @@
+<div class="row" data-toggle="isotope">
+  <div class="item col-xs-12 col-lg-12">
+    <div class="panel panel-default paper-shadow" data-z="0.5">
+      <div class="panel-heading">
+        <h4 class="text-headline margin-none">Leagues</h4>
+        <p class="text-subhead text-light">Your Fantasy Draft Hub Leagues</p>
+      </div>
+
+      <ul class="list-group">
+        <li class="list-group-item media v-middle" ng-repeat="league in fantasyLeagues">
+          <div class="media-body">
+            <a ui-sref="auth.fantasy-league({fantasyLeagueId: league.id})" class="text-subhead list-group-link">{{league.name}}</a>
+          </div>
+        </li>
+        <li class="list-group-item media v-middle" ng-show="fantasyLeagues.length == 0">
+          <div class="media-body">
+            It sure looks like you haven't created any leagues... Click the button below here to create one.
+          </div>
+        </li>
+      </ul>
+      <div class="panel-footer text-right">
+        <button data-toggle="modal" data-target="#modal-create-league" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated>
+          Create New League
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal grow modal-backdrop-white fade" id="modal-create-league">
+  <div class="modal-dialog modal-lg">
+    <div class="v-cell">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">Create New Fantasy Draft Hub League</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="name" placeholder="Enter your leagues name" ng-model="newLeague.name">
+              <label for="name">League Name</label>
+            </div>
+
+            <button ng-click="createLeague()" class="btn btn-success paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
+              Add My League Now!
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-default navbar-fixed-top navbar-size-large navbar-size-xlarge paper-shadow" data-z="0" data-animated role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <div class="navbar-brand navbar-brand-logo">
+          <a ui-sref="auth.dashboard">
+            Fantasy Draft Hub
+          </a>
+        </div>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="main-nav">
+        <div class="navbar-right">
+          <ul class="nav navbar-nav navbar-nav-bordered navbar-nav-margin-right">
+            <li class="dropdown user">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Hello, {{currentUser.name}}<span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li class="active"><a href="website-student-dashboard.html"><i class="fa fa-bar-chart-o"></i> Dashboard</a></li>
+                <li><a href="website-student-courses.html"><i class="fa fa-mortar-board"></i> My Courses</a></li>
+                <li><a href="website-student-profile.html"><i class="fa fa-user"></i> Profile</a></li>
+                <li><a href="login.html"><i class="fa fa-sign-out"></i> Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+          <a ng-click="logout()" class="navbar-btn btn btn-primary">Log Out</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="parallax overflow-hidden bg-blue-400 page-section third">
+    <div class="container parallax-layer" data-opacity="true">
+      <div class="media v-middle">
+        <div class="media-body">
+          <i class="icon-football-1"></i><h1 class="text-white text-display-1 margin-v-0">League Management</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+
+
+    <div class="page-section">
+      <div flash-message="5000"></div>
+      <div class="row">
+
+        <div class="col-md-3">
+          <div class="panel panel-default" data-toggle="panel-collapse" data-open="true">
+            <div class="panel-heading">
+              <h4 class="panel-title">My Account</h4>
+            </div>
+            <div class="panel-body list-group">
+              <ul class="list-group list-group-menu">
+                <li class="list-group-item"><a class="link-text-color" ui-sref="auth.dashboard">Dashboard</a></li>
+                <li class="list-group-item"><a class="link-text-color" href="website-student-courses.html">My Courses</a></li>
+                <li class="list-group-item"><a class="link-text-color" href="website-student-profile.html">Profile</a></li>
+                <li class="list-group-item"><a class="link-text-color" href="website-student-messages.html">Messages</a></li>
+                <li class="list-group-item"><a class="link-text-color" ng-click="logout()"><span>Logout</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-9">
+          <ui-view></ui-view>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <strong>Fantasy Draft Hub LLC.</strong> v1.1.0 &copy; Copyright 2015
+  </footer>

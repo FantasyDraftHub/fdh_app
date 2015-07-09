@@ -1,0 +1,92 @@
+<div class="row" data-toggle="isotope">
+  <div class="item col-xs-12 col-lg-12">
+    <div class="panel panel-default paper-shadow" data-z="0.5">
+      <div class="panel-heading">
+        <h4 class="text-headline margin-none">{{fantasyLeague.name}}'s Teams</h4>
+        <p class="text-subhead text-light">Your Fantasy Draft Hub Leagues Teams</p>
+      </div>
+
+      <ul class="list-group">
+        <li class="list-group-item media v-middle" ng-repeat="(index, fantasyTeam) in fantasyLeague.fantasyTeams">
+          <div class="media-body" data-toggle="modal" data-target="#modal-update-fantasy-team" ng-click="setUpdateFantasyTeam(fantasyTeam)">
+            <h4 class="text-subhead margin-none">
+              <a href="javascript:void(0)" class="list-group-link">{{fantasyTeam.name}}</a>
+            </h4>
+            <div class="caption">
+              <span class="text-light">Owner:</span>
+              <a href="javascript:void(0)">{{fantasyTeam.owner}}</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="panel-footer text-right">
+        <button data-toggle="modal" data-target="#modal-create-fantasy-team" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated>
+          Add New Fantasy Team
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal grow modal-backdrop-white fade" id="modal-create-fantasy-team">
+  <div class="modal-dialog modal-lg">
+    <div class="v-cell">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">Create New Fantasy Team for your League</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="name" placeholder="Enter the teams name" ng-model="newFantasyTeam.name">
+              <label for="name">Team Name</label>
+            </div>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="owner" placeholder="Enter the teams owners real name" ng-model="newFantasyTeam.owner">
+              <label for="owner">Owner Real Name</label>
+            </div>
+
+            <button ng-click="createFantasyTeam()" class="btn btn-success paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
+              Add Team to My League Now!
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal grow modal-backdrop-white fade" id="modal-update-fantasy-team">
+  <div class="modal-dialog modal-lg">
+    <div class="v-cell">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">Update Teams Information</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="name" placeholder="Enter the teams name" ng-model="updateFantasyTeam.name">
+              <label for="name">Team Name</label>
+            </div>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="owner" placeholder="Enter the teams owners real name" ng-model="updateFantasyTeam.owner">
+              <label for="owner">Owner Real Name</label>
+            </div>
+
+            <button ng-click="editFantasyTeam()" class="btn btn-success paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
+              Update This Team!
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
