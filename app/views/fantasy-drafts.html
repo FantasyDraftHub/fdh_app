@@ -1,0 +1,165 @@
+<div class="parallax overflow-hidden bg-blue-400 page-section third">
+  <div class="container parallax-layer" data-opacity="true">
+    <div class="media v-middle">
+      <div class="media-body">
+        <i class="icon-football-1"></i><h1 class="text-white text-display-1 margin-v-0">Fantasy Drafts</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="page-section">
+    <div flash-message="5000"></div>
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="row" data-toggle="isotope">
+          <div class="item col-xs-12 col-lg-12">
+            <div class="panel panel-default paper-shadow" data-z="0.5">
+              <div class="panel-heading">
+                <h4 class="text-headline margin-none">Your Draft Boards</h4>
+                <p class="text-subhead text-light">Here is a list of all the Draft Boards.</p>
+              </div>
+
+              <ul class="list-group">
+                <li class="list-group-item media v-middle" ng-repeat="fantasyDraft in fantasyDrafts">
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="media-body">
+                      <a ng-click="setFantasyDraft(fantasyDraft)" data-toggle="modal" data-target="#modal-create-draft">
+                        {{fantasyDraft.name}}
+                      </a>
+
+                      <div class="caption">
+                        <span class="text-light">Created:</span>
+                        <span style="color: #337ab7">{{fantasyDraft.createdAt | date:'medium'}}</span>
+                      </div>
+                      <div class="caption">
+                        <span class="text-light">Draft Password:</span>
+                        <span style="color: #337ab7">{{fantasyDraft.password}}</span>
+                      </div>
+                      <div class="caption">
+                        <span class="text-light">Draft URL:</span>
+                        <span style="color: #337ab7">{{fantasyDraft.url}}</span>
+                      </div>
+                      <div class="caption">
+                        <span class="text-light">Total Rounds:</span>
+                        <span style="color: #337ab7">{{fantasyDraft.rounds}}</span>
+                      </div>
+                      <div class="caption">
+                        <span class="text-light">Max Amount:</span>
+                        <span style="color: #337ab7">{{fantasyDraft.max | currency}}</span>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div>
+                      What would you like to do?
+                    </div>
+                    <br />
+                    <a class="btn btn-primary" ng-click="setFantasyDraft(fantasyDraft)" data-toggle="modal" data-target="#modal-create-draft">
+                      Edit Draft
+                    </a>
+                    <a class="btn btn-primary" ui-sref="auth.fantasy-teams({fantasyDraftId: fantasyDraft.id})">
+                      Manage Teams
+                    </a>
+                    <a class="btn btn-primary" ui-sref="auth.fantasy-draft({fantasyDraftId: fantasyDraft.id})">
+                      Draft Panel
+                    </a>
+                  </div>
+                </li>
+                <li class="list-group-item media v-middle" ng-show="fantasyLeagues.length == 0">
+                  <div class="media-body">
+                    It sure looks like you haven't created any draft boards... Click the button below here to create one.
+                  </div>
+                </li>
+              </ul>
+              <div class="panel-footer text-right">
+                <button data-toggle="modal" data-target="#modal-create-draft" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated>
+                  Create New Draft Board
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal grow modal-backdrop-white fade" id="modal-create-draft">
+  <div class="modal-dialog modal-md">
+    <div class="v-cell">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">Fantasy Draft Board</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="name" placeholder="Enter your draft boards name" ng-model="fantasyDraft.name">
+              <label for="name">Draft Board Name</label>
+            </div>
+
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="max" placeholder="What is the max amount each player can be allocated?" ng-model="fantasyDraft.max">
+              <label for="max">Max Dollar Amount Per Team</label>
+            </div>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="rounds" placeholder="What is the total rounds for this draft?" ng-model="fantasyDraft.rounds">
+              <label for="rounds">Total Rounds</label>
+            </div>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="password" placeholder="Enter the public password anyone can use to access your draft board" ng-model="fantasyDraft.password">
+              <label for="password">Draft Board Password</label>
+            </div>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="starts_at" placeholder="What day and time will your draft take place?" ng-model="fantasyDraft.starts_at">
+              <label for="starts_at">Draft Start Date and Time</label>
+            </div>
+
+            <button ng-click="saveFantasyDraft(fantasyDraft)" class="btn btn-success paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
+              Save Draft Board
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

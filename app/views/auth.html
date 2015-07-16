@@ -32,49 +32,7 @@
     </div>
   </div>
 
-  <div class="parallax overflow-hidden bg-blue-400 page-section third">
-    <div class="container parallax-layer" data-opacity="true">
-      <div class="media v-middle">
-        <div class="media-body">
-          <i class="icon-football-1"></i><h1 class="text-white text-display-1 margin-v-0">League Management</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-
-
-
-    <div class="page-section">
-      <div flash-message="5000"></div>
-      <div class="row">
-
-        <div class="col-md-3">
-          <div class="panel panel-default" data-toggle="panel-collapse" data-open="true">
-            <div class="panel-heading">
-              <h4 class="panel-title">My Account</h4>
-            </div>
-            <div class="panel-body list-group">
-              <ul class="list-group list-group-menu">
-                <li class="list-group-item"><a class="link-text-color" ui-sref="auth.dashboard">Dashboard</a></li>
-                <li class="list-group-item"><a class="link-text-color" href="website-student-courses.html">My Courses</a></li>
-                <li class="list-group-item"><a class="link-text-color" href="website-student-profile.html">Profile</a></li>
-                <li class="list-group-item"><a class="link-text-color" href="website-student-messages.html">Messages</a></li>
-                <li class="list-group-item"><a class="link-text-color" ng-click="logout()"><span>Logout</span></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-9">
-          <ui-view></ui-view>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
+  <ui-view></ui-view>
 
   <!-- Footer -->
   <footer class="footer">

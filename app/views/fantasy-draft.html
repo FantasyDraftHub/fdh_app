@@ -1,0 +1,155 @@
+<div class="parallax overflow-hidden bg-blue-400 page-section third">
+  <div class="container parallax-layer" data-opacity="true">
+    <div class="media v-middle">
+      <div class="media-body">
+        <i class="icon-football-1"></i><h1 class="text-white text-display-1 margin-v-0">Draft Board Manager Panel</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" ng-show="players">
+  <div class="page-section">
+    <div flash-message="5000"></div>
+    <div class="row">
+      <div class="col-md-6">
+
+
+
+          <div class="panel panel-default paper-shadow">
+            <div class="panel-heading">
+              <h4 class="text-headline margin-none">Step 1: On The Block Player</h4>
+              <p class="text-subhead text-light">Select the player that is On The Block.</p>
+            </div>
+
+            <div class="panel-body">
+              <div ng-if="player.id">
+                <br />
+                <br />
+                <div class="text-center" style="font-size:18px;">
+                  <strong>{{player.firstName}} {{player.lastName}}</strong> is currently "On The Block"
+                </div>
+                <br />
+                <br />
+
+
+                <button ng-click="unSetOnTheBlock()" class="btn btn-danger btn-block">
+                  Remove this player from the block
+                </button>
+              </div>
+
+              <div ng-if="!player.id">
+                <ui-select ng-model="fantasyDraft.playerId" title="Select Player">
+                  <ui-select-match placeholder="Select Player">
+                    {{$select.selected.firstName}} {{$select.selected.lastName}}
+                  </ui-select-match>
+
+                  <ui-select-choices repeat="player.id as player in players | orderBy:'lastName' | filter:query">
+                    <div ng-bind-html="player.lastName | highlight: $select.search"></div>
+                    <div>
+                      {{player.firstName}} {{player.lastName}}
+                    </div>
+                  </ui-select-choices>
+                </ui-select>
+
+                <br />
+                <button ng-click="setOnTheBlock()" class="btn btn-success btn-block">
+                  Set On The Block Player
+                </button>
+              </div>
+
+
+            </div>
+          </div>
+      </div>
+      <div class="col-md-6">
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="text-headline margin-none">Step 2: Add Draft Pick</h4>
+            <p class="text-subhead text-light">Select the team and enter price paid for draft pick.</p>
+          </div>
+
+          <div class="panel-body text-center">
+          <form class="form">
+            <div ng-if="player.id">
+              <br />
+              <div class="text-center" style="font-size:18px;">
+                <strong>{{player.firstName}} {{player.lastName}}</strong> has been drafted to:
+              </div>
+              <br />
+
+              <ui-select ng-model="fantasyDraftPick.fantasyTeam" title="Select Team">
+                <ui-select-match placeholder="Select Team">
+                  {{$select.selected.owner}} - {{$select.selected.name}}
+                </ui-select-match>
+
+                <ui-select-choices repeat="fantasyTeam in fantasyTeams | orderBy:'owner' | filter:query">
+                  <div>
+                    {{fantasyTeam.owner}} {{fantasyTeam.name}}
+                  </div>
+                </ui-select-choices>
+              </ui-select>
+
+              <br />
+              for
+              <br />
+
+              <div class="input-prepend">
+                <span class="add-on">$</span>
+                <input class="span5" id="fantasy_player_price" ng-model="fantasyDraftPick.price" type="number">
+              </div>
+
+              <br />
+              <br />
+
+              <button ng-click="addDraftPick()" class="btn btn-primary btn-block">
+                Add Draft Pick!
+              </button>
+            </div>
+            <div ng-if="!player.id">
+              You must select a player to be "On The Block"
+            </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="text-headline margin-none">Previous Draft Picks</h4>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>Price Paid</th>
+                <th>Team</th>
+                <th>Owner</th>
+                <th>Manage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="fantasyDraftPick in fantasyDraftPicks | orderBy:'-id'">
+                <td>{{fantasyDraftPick.player.firstName}} {{fantasyDraftPick.player.lastName}}</td>
+                <td>{{fantasyDraftPick.price | currency}}</td>
+                <td>{{fantasyDraftPick.fantasyTeam.name}}</td>
+                <td>{{fantasyDraftPick.fantasyTeam.owner}} </td>
+                <td>Edit</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+

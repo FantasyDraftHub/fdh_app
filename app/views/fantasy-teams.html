@@ -1,0 +1,101 @@
+<div class="parallax overflow-hidden bg-blue-400 page-section third">
+  <div class="container parallax-layer" data-opacity="true">
+    <div class="media v-middle">
+      <div class="media-body">
+        <h1 class="text-white text-display-1 margin-v-0">
+          <a class="text-white" ui-sref="auth.fantasy-drafts">
+            Fantasy Drafts
+          </a>
+          | {{fantasyDraft.name}} Teams
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="page-section">
+    <div flash-message="5000"></div>
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="row" data-toggle="isotope">
+          <div class="item col-xs-12 col-lg-12">
+            <div class="panel panel-default paper-shadow" data-z="0.5">
+              <div class="panel-heading">
+                <h4 class="text-headline margin-none">{{fantasyDraft.name}} Teams</h4>
+                <p class="text-subhead text-light">Here is a list of all the teams for this draft board.</p>
+              </div>
+
+              <ul class="list-group" as-sortable="sortableOptions" ng-model="fantasyTeams">
+                <li
+                  class="list-group-item as-sortable-item  media v-middle"
+                  ng-repeat="fantasyTeam in fantasyTeams"
+                  as-sortable-item
+                  >
+                  <div class="media-body">
+                    <h4 class="text-subhead margin-none">
+                      <a ng-click="setFantasyTeam(fantasyTeam)" data-toggle="modal" data-target="#modal-fantasy-team" class="list-group-link">{{fantasyTeam.name}}</a>
+                    </h4>
+                    <div class="caption">
+                      <span class="text-light">Owner:</span>
+                      <span style="color: #337ab7">{{fantasyTeam.owner}}</span>
+                    </div>
+                  </div>
+                  <div class="media-right">
+                    <i class="as-sortable-item-handle glyphicon glyphicon-menu-hamburger" as-sortable-item-handle></i>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="panel-footer text-right">
+                <button data-toggle="modal" data-target="#modal-fantasy-team" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated>
+                  Create New Draft Team
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="modal grow modal-backdrop-white fade" id="modal-fantasy-team">
+  <div class="modal-dialog modal-md">
+    <div class="v-cell">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">Fantasy Team</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="name" placeholder="Enter the teams name" ng-model="fantasyTeam.name">
+              <label for="name">Team Name</label>
+            </div>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="owner" placeholder="Enter the teams owners real name" ng-model="fantasyTeam.owner">
+              <label for="owner">Owner Real Name</label>
+            </div>
+
+            <button ng-click="saveFantasyTeam(fantasyTeam)" class="btn btn-success btn-block paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
+              Save Team
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

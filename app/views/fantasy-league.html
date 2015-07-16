@@ -1,9 +1,9 @@
-<div class="row" data-toggle="isotope">
-  <div class="item col-xs-12 col-lg-12">
+<div class="row">
+  <div class="item col-xs-6 col-lg-6">
     <div class="panel panel-default paper-shadow" data-z="0.5">
       <div class="panel-heading">
-        <h4 class="text-headline margin-none">{{fantasyLeague.name}}'s Teams</h4>
-        <p class="text-subhead text-light">Your Fantasy Draft Hub Leagues Teams</p>
+        <h4 class="text-headline margin-none">Step 1: Set your teams</h4>
+        <p class="text-subhead text-light">Manage your leagues teams</p>
       </div>
 
       <ul class="list-group">
@@ -14,7 +14,7 @@
             </h4>
             <div class="caption">
               <span class="text-light">Owner:</span>
-              <a href="javascript:void(0)">{{fantasyTeam.owner}}</a>
+              <span style="color: #337ab7">{{fantasyTeam.owner}}</span>
             </div>
           </div>
         </li>
@@ -27,10 +27,69 @@
       </div>
     </div>
   </div>
+
+  <div class="item col-xs-6 col-lg-6">
+    <div class="panel panel-default paper-shadow" data-z="0.5">
+      <div class="panel-heading">
+        <h4 class="text-headline margin-none">Step 2: Set your draft board</h4>
+        <p class="text-subhead text-light">Manage your leagues drafts</p>
+      </div>
+
+      <ul class="list-group">
+        <li class="list-group-item media v-middle" ng-repeat="(index, fantasyDraft) in fantasyLeague.fantasyDrafts">
+
+          <div class="media-body" data-toggle="modal" data-target="#modal-update-fantasy-draft" ng-click="setUpdateFantasyTeam(fantasyTeam)">
+            <h4 class="text-subhead margin-none">
+              <a href="javascript:void(0)" class="list-group-link">Auction Draft</a>
+            </h4>
+
+            <div class="caption">
+              <span class="text-light">Created:</span>
+              <span style="color: #337ab7">{{fantasyDraft.createdAt | date:'medium'}}</span>
+            </div>
+            <div class="caption">
+              <span class="text-light">Draft Password:</span>
+              <span style="color: #337ab7">{{fantasyDraft.password}}</span>
+            </div>
+            <div class="caption">
+              <span class="text-light">Draft URL:</span>
+              <span style="color: #337ab7">{{fantasyDraft.url}}</span>
+            </div>
+            <div class="caption">
+              <span class="text-light">Total Rounds:</span>
+              <span style="color: #337ab7">{{fantasyDraft.rounds}}</span>
+            </div>
+            <div class="caption">
+              <span class="text-light">Max Amount:</span>
+              <span style="color: #337ab7">{{fantasyDraft.max | currency}}</span>
+            </div>
+          </div>
+
+          <div class="media-right">
+
+            <button class="btn btn-info paper-shadow" data-toggle="modal" data-target="#modal-set-fantasy-draft-order" ng-click="fantasyDraftOrder = fantasyDraft">
+              Set Draft Order
+            </button>
+
+            <a ui-sref="draft({url: fantasyDraft.url})" class="btn btn-primary paper-shadow" data-z="0" data-hover-z="1" data-animated="">
+              Draft Board
+            </a>
+
+          </div>
+        </li>
+      </ul>
+
+      <div class="panel-footer text-right">
+        <button data-toggle="modal" data-target="#modal-create-fantasy-draft" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated>
+          Add New Fantasy Draft
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="modal grow modal-backdrop-white fade" id="modal-create-fantasy-team">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-md">
     <div class="v-cell">
       <div class="modal-content">
         <div class="modal-header">
@@ -50,7 +109,7 @@
               <label for="owner">Owner Real Name</label>
             </div>
 
-            <button ng-click="createFantasyTeam()" class="btn btn-success paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
+            <button ng-click="createFantasyTeam()" class="btn btn-success btn-block paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
               Add Team to My League Now!
             </button>
           </form>
@@ -61,7 +120,7 @@
 </div>
 
 <div class="modal grow modal-backdrop-white fade" id="modal-update-fantasy-team">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-md">
     <div class="v-cell">
       <div class="modal-content">
         <div class="modal-header">
@@ -81,7 +140,7 @@
               <label for="owner">Owner Real Name</label>
             </div>
 
-            <button ng-click="editFantasyTeam()" class="btn btn-success paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
+            <button ng-click="editFantasyTeam()" class="btn btn-success btn-block paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
               Update This Team!
             </button>
           </form>
@@ -90,3 +149,99 @@
     </div>
   </div>
 </div>
+
+<div class="modal grow modal-backdrop-white fade" id="modal-create-fantasy-draft">
+  <div class="modal-dialog modal-md">
+    <div class="v-cell">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">Create New Fantasy Draft Board for your League</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="max" placeholder="What is the max amount each player can be allocated?" ng-model="newFantasyDraft.max">
+              <label for="max">Max Dollar Amount Per Team</label>
+            </div>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="rounds" placeholder="What is the total rounds for this draft?" ng-model="newFantasyDraft.rounds">
+              <label for="rounds">Total Rounds</label>
+            </div>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="password" placeholder="Enter the public password anyone can use to access your draft board" ng-model="newFantasyDraft.password">
+              <label for="password">Draft Board Password</label>
+            </div>
+
+            <button ng-click="createFantasyDraft()" class="btn btn-success btn-block paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
+              Add Draft to My League Now!
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal grow modal-backdrop-white fade" id="modal-set-fantasy-draft-order">
+  <div class="modal-dialog modal-md">
+    <div class="v-cell">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">Set Draft Order</h4>
+        </div>
+        <div class="modal-body">
+
+            <ul class="list-group" as-sortable="sortableOptions" ng-model="fantasyDraftOrder">
+              <li class="list-group-item media v-middle" ng-repeat="fantasyTeam in fantasyDraftOrder.fantasyDraftOrder" as-sortable-item class="as-sortable-item">
+
+              <div class="media-body as-sortable-item-handle" as-sortable-item-handle>
+                <div class="media-body">
+                  <h4 class="text-subhead margin-none">
+                    <a href="javascript:void(0)" class="list-group-link">{{fantasyTeam.name}}</a>
+                  </h4>
+                  <div class="caption">
+                    <span class="text-light">Owner:</span>
+                    <span style="color: #337ab7">{{fantasyTeam.owner}}</span>
+                  </div>
+                </div>
+                <div class="media-right">
+                  <i class="glyphicon glyphicon-menu-hamburger"></i>
+                </div>
+              </div>
+              </li>
+            </ul>
+
+            <button ng-click="saveDraftOrder()" class="btn btn-success btn-block paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
+              Save Draft Order
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

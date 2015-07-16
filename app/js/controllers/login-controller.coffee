@@ -11,6 +11,6 @@ angular.module 'fantasyDraftHub'
       authService.login(creds)
       .success (data) ->
         flashService.success 'Welcome aboard matey!'
-        $state.go('auth.dashboard')
+        $state.go('auth.draft-boards')
       .error (data) ->
         flashService.error 'Whoops! Invalid credentials.'
