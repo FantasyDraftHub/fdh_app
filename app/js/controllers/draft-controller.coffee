@@ -1,7 +1,7 @@
 angular.module 'fantasyDraftHub'
   .controller 'draftController', ($scope, $state, $stateParams, $http, APP_CONSTANTS, Pusher) ->
     $scope.enableFantasyBoard = true
-    $scope.password = 'honkies'
+    $scope.password = 'board'
 
     # $scope.enableFantasyBoard = false
     # $scope.password = ''

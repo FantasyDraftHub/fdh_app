@@ -69,6 +69,7 @@ appModule.run ($rootScope, $state, authService, sessionService, flashService, ro
     if toState.data and toState.data.requireLogin
       if !authService.isLoggedIn()
         evt.preventDefault()
+        console.log toState
         $state.go('login')
       else
 
