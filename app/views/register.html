@@ -4,12 +4,16 @@
   </div>
   <div class="panel panel-default panel-login">
     <div class="panel-heading">
-      <h3 class="panel-title">Fantasy Draft Hub Login</h3>
+      <h3 class="panel-title">Fantasy Draft Hub Registration</h3>
     </div>
     <div class="panel-body">
-      <form class="form form-login" ng-submit="login(creds)">
+      <form class="form form-login" ng-submit="register(creds)">
         <div flash-message="5000" ></div>
-        <p class="login-status">{{loginStatus}}</p>
+        <p class="login-status">{{registerStatus}}</p>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span>
+          <input type="text" class="form-control" placeholder="Name" ng-model="creds.name" id="name">
+        </div>
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span>
           <input type="text" class="form-control" placeholder="Username" ng-model="creds.email" id="email">

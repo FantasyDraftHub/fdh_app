@@ -3,7 +3,7 @@
     <div class="media v-middle">
       <div class="media-body">
         <h1 class="text-white text-display-1 margin-v-0">
-          <a class="text-white" ui-sref="auth.fantasy-drafts">
+          <a class="text-gray" ui-sref="auth.fantasy-drafts">
             Fantasy Drafts
           </a>
           | {{fantasyDraft.name}} Teams
@@ -19,37 +19,41 @@
     <div class="row">
       <div class="col-md-12">
 
-        <div class="row" data-toggle="isotope">
+        <div class="row">
           <div class="item col-xs-12 col-lg-12">
             <div class="panel panel-default paper-shadow" data-z="0.5">
               <div class="panel-heading">
-                <h4 class="text-headline margin-none">{{fantasyDraft.name}} Teams</h4>
-                <p class="text-subhead text-light">Here is a list of all the teams for this draft board.</p>
+                <h4 class="text-headline margin-none">Your Fantasy Draft Teams</h4>
               </div>
 
-              <ul class="list-group" as-sortable="sortableOptions" ng-model="fantasyTeams">
-                <li
-                  class="list-group-item as-sortable-item  media v-middle"
-                  ng-repeat="fantasyTeam in fantasyTeams"
-                  as-sortable-item
-                  >
-                  <div class="media-body">
-                    <h4 class="text-subhead margin-none">
-                      <a ng-click="setFantasyTeam(fantasyTeam)" data-toggle="modal" data-target="#modal-fantasy-team" class="list-group-link">{{fantasyTeam.name}}</a>
-                    </h4>
-                    <div class="caption">
-                      <span class="text-light">Owner:</span>
-                      <span style="color: #337ab7">{{fantasyTeam.owner}}</span>
-                    </div>
-                  </div>
-                  <div class="media-right">
+              <ul class="list-group" as-sortable="sortableOptions" ng-model="fantasyTeams" ng-show="fantasyTeams.length">
+                <li class="list-group-item as-sortable-item  media v-middle" ng-repeat="fantasyTeam in fantasyTeams" as-sortable-item>
+                  <div class="pull-right">
+                    <span class="helper">To adjust the Fantasy Draft order <strong>click and drag</strong> the handle to set the draft order.</span>
                     <i class="as-sortable-item-handle glyphicon glyphicon-menu-hamburger" as-sortable-item-handle></i>
+                  </div>
+
+                  <div>
+                    <h4 class="text-subhead margin-none">
+                      <a ng-click="setFantasyTeam(fantasyTeam)" data-toggle="modal" data-target="#modal-fantasy-team" class="list-group-link" style="color:#337AB9; cursor:pointer">
+                        {{fantasyTeam.name}}
+                      </a>
+                      <span class="helper" style="padding-left:5px;">Click Fantasy Team Name to Edit</span>
+                    </h4>
+                  </div>
+                </li>
+              </ul>
+
+              <ul class="list-group" ng-show="!fantasyTeams.length">
+                <li class="list-group-item media v-middle" >
+                  <div class="media-body" style="font-size:16px;">
+                    You have not added any fantasy teams to your draft board. To add a Fantasy Team, click the button below here to create one.
                   </div>
                 </li>
               </ul>
 
               <div class="panel-footer text-right">
-                <button data-toggle="modal" data-target="#modal-fantasy-team" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated>
+                <button ng-click="fantasyTeam = {}; formErrors = []" data-toggle="modal" data-target="#modal-fantasy-team" class="btn btn-success">
                   Create New Draft Team
                 </button>
               </div>
@@ -63,7 +67,6 @@
   </div>
 </div>
 
-
 <div class="modal grow modal-backdrop-white fade" id="modal-fantasy-team">
   <div class="modal-dialog modal-md">
     <div class="v-cell">
@@ -76,19 +79,22 @@
           <h4 class="modal-title">Fantasy Team</h4>
         </div>
         <div class="modal-body">
+          <div class="alert alert-danger" ng-if="formErrors.length">
+            <ul>
+              <li ng-repeat="error in formErrors">{{error}}</li>
+            </ul>
+          </div>
+
           <form>
 
             <div class="form-group form-control-material">
-              <input type="text" class="form-control" id="name" placeholder="Enter the teams name" ng-model="fantasyTeam.name">
-              <label for="name">Team Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter the fantasy teams name" ng-model="fantasyTeam.name" ng-class="{used: fantasyTeam.name}">
+              <span class="ma-form-highlight"></span>
+              <span class="ma-form-bar"></span>
+              <label for="name">Fantasy Team Name</label>
             </div>
 
-            <div class="form-group form-control-material">
-              <input type="text" class="form-control" id="owner" placeholder="Enter the teams owners real name" ng-model="fantasyTeam.owner">
-              <label for="owner">Owner Real Name</label>
-            </div>
-
-            <button ng-click="saveFantasyTeam(fantasyTeam)" class="btn btn-success btn-block paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
+            <button ng-click="saveFantasyTeam(fantasyTeam)" class="btn btn-success btn-block">
               Save Team
             </button>
           </form>
@@ -97,5 +103,3 @@
     </div>
   </div>
 </div>
-
-

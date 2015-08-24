@@ -10,22 +10,33 @@ angular.module 'fantasyDraftHub'
       $scope.fantasyTeams = angular.copy($scope.fantasyDraft.fantasyTeams)
 
     $scope.saveFantasyTeam = () ->
+      $scope.formErrors = []
+      errors = false
 
-      if $scope.fantasyTeam.id
-        $http.put(APP_CONSTANTS.apiUrl+'/fantasy_drafts/'+$stateParams.fantasyDraftId+'/fantasy_teams/'+$scope.fantasyTeam.id, $scope.fantasyTeam)
-        .success (data) ->
-          flashService.success 'Awesome! The team has been updated!'
-          $scope.fantasyTeam = {}
-        .error (data) ->
-          flashService.error 'Name can\'t be blank'
-      else
-        $http.post(APP_CONSTANTS.apiUrl+'/fantasy_drafts/'+$stateParams.fantasyDraftId+'/fantasy_teams', $scope.fantasyTeam)
-        .success (data) ->
-          flashService.success 'Awesome! You have added a new team to your board'
-          $scope.fantasyTeams.push(data)
-          $scope.fantasyTeam = {}
-        .error (data) ->
-          flashService.error 'Name can\'t be blank'
+      if !_.has($scope.fantasyTeam, 'name') || $scope.fantasyTeam.name == ''
+        $scope.formErrors.push('Fantasy Team name is required.')
+        errors = true
+
+      if errors == false
+        $('#modal-fantasy-team').modal('hide')
+
+        if $scope.fantasyTeam.id
+          $http.put(APP_CONSTANTS.apiUrl+'/fantasy_drafts/'+$stateParams.fantasyDraftId+'/fantasy_teams/'+$scope.fantasyTeam.id, $scope.fantasyTeam)
+          .success (data) ->
+            flashService.success 'Awesome! The team has been updated!'
+            $scope.fantasyTeam = {}
+          .error (data) ->
+            flashService.error 'An Error occurred attempting to save the fantasy team please try again'
+        else
+          $http.post(APP_CONSTANTS.apiUrl+'/fantasy_drafts/'+$stateParams.fantasyDraftId+'/fantasy_teams', $scope.fantasyTeam)
+          .success (data) ->
+            flashService.success 'Awesome! You have added a new team to your board'
+            $scope.fantasyTeams.push(data)
+            $scope.fantasyTeam = {}
+          .error (data) ->
+            flashService.error 'An Error occurred attempting to save the fantasy team please try again'
+
+        return
 
     $scope.setFantasyTeam = (fantasyTeam) ->
       $scope.fantasyTeam = fantasyTeam

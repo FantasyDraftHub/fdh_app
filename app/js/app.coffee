@@ -1,5 +1,5 @@
 appModule = angular.module 'fantasyDraftHub',
-  ['ngAnimate', 'LocalStorageModule', 'ngSanitize', 'ui.router', 'ui.utils', 'ui.select', 'ui.sortable', 'flash', 'angular-repeat-n', 'twygmbh.auto-height', 'doowb.angular-pusher']
+  ['ngAnimate', 'LocalStorageModule', 'ngSanitize', 'ui.router', 'ui.utils', 'ui.select', 'ui.sortable', 'flash', 'angular-repeat-n', 'twygmbh.auto-height', 'doowb.angular-pusher', 'ngFitText', 'ui.bootstrap']
 
 appModule.config ($stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceProvider, PusherServiceProvider) ->
 
@@ -8,6 +8,11 @@ appModule.config ($stateProvider, $urlRouterProvider, $httpProvider, localStorag
     url: '/login'
     templateUrl: '/views/login.html'
     controller: 'loginController'
+
+  .state 'register',
+    url: '/register'
+    templateUrl: '/views/register.html'
+    controller: 'registerController'
 
   .state 'logout',
     url: '/logout'

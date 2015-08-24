@@ -25,52 +25,92 @@
   </div>
 </div>
 
+<div class="fluid-container" ng-if="enableFantasyBoard">
+  <div class="row">
+    <div class="col-md-10">
 
-<div ng-if="enableFantasyBoard">
-  Round: {{currentRound}}<br />
-  Player: {{player.firstName}} {{player.lastName}}
-  <div id="draft_board" auto-height>
+      <div class="draft-board">
+        <div class="fantasy-team-column" ng-repeat="fantasyTeam in fantasyTeams" ng-style="{'width': calculateColumnWidth()}">
 
-    <ul class="draft_board__round_column">
-      <li>
-        &nbsp;
-      </li>
-      <li style="height:2%">
-        &nbsp;
-      </li>
-      <li ng-repeat-n="fantasyDraft.rounds">
-        {{$index + 1}}
-      </li>
-    </ul>
+          <div class="fantasy-team effect5">
+            <div class="name">
+              {{fantasyTeam.name}}
+            </div>
 
-    <ul class="draft_board__column" ng-repeat="fantasyTeam in fantasyTeams">
-      <li ng-class="{'active-team': teamThatsUp.id == fantasyTeam.id}">
-          {{fantasyTeam.name}}
-      </li>
-      <li class="max" style="height:2%" ng-class="{'active-team': teamThatsUp.id == fantasyTeam.id}">
-        <center>Max: ${{calculateMaxBid(fantasyTeam)}}</center>
-      </li>
-      <li class="{{fantasyDraftPick.player.position.key}}" ng-repeat="fantasyDraftPick in fantasyTeam.fantasyDraftPicks">
-        <div class="draft_pick_card">
-          <span class="label label-info pull-left">
-            {{fantasyDraftPick.player.position.key}}
-          </span>
-          <span class="label label-info pull-right">
-            ${{fantasyDraftPick.price}}
-          </span>
-          <div class="first_name">
-            {{fantasyDraftPick.player.firstName}}
+            <div class="row-fluid total-spent">
+              <div class="col-md-6" style="text-align:right;margin:0;padding:0">Spent:</div>
+              <div class="col-md-6" style="margin:0"><strong>${{calculateTeamTotalSpent(fantasyTeam)}}</strong></div>
+            </div>
+            <div class="row-fluid total-left">
+              <div class="col-md-6" style="text-align:right;margin:0;padding:0">Left:</div>
+              <div class="col-md-6" style="margin:0"><strong>${{fantasyDraft.max - calculateTeamTotalSpent(fantasyTeam)}}</strong></div>
+            </div>
+            <div class="row-fluid max-bid">
+              <div class="col-md-6" style="text-align:right;margin:0;padding:0">Max:</div>
+              <div class="col-md-6" style="margin:0"><strong>${{calculateMaxBid(fantasyTeam)}}</strong></div>
+            </div>
           </div>
-          <div class="last_name">
-            {{fantasyDraftPick.player.lastName}}
+
+          <div class="draft-picks">
+            <ul>
+              <li class="{{fantasyDraftPick.player.position.key}}" ng-repeat="fantasyDraftPick in fantasyTeam.fantasyDraftPicks" >
+                <div class="first-name">
+                  {{fantasyDraftPick.player.firstName}}
+                </div>
+                <div class="last-name" data-fittext data-fittext-max="30">
+                  {{fantasyDraftPick.player.lastName}}
+                </div>
+                <div class="details">
+                  <div class="position pull-left">
+                    {{fantasyDraftPick.player.position.key}}
+                  </div>
+                  <div class="price-paid pull-right">
+                    ${{fantasyDraftPick.price}}
+                  </div>
+                </div>
+              </li>
+              <li class="blank" ng-repeat-n="{{fantasyDraft.rounds - fantasyTeam.fantasyDraftPicks.length}}">empty</span>
+            </ul>
           </div>
+
         </div>
-      </li>
+      </div>
+    </div>
+    <div class="col-md-2">
 
-      <li ng-repeat-n="fantasyDraft.rounds - fantasyTeam.fantasyDraftPicks.length"></li>
-    </ul>
-    <div class="clearfix"></div>
+      <div class="on-the-block" ng-if="player.firstName && !isDraftOver()">
+        <p>On The Block</p>
+        <p class="player-name"><strong>{{player.firstName}} {{player.lastName}}</strong></p>
+        <p><small><small>{{player.position.name}}</small></small></p>
+        <p><small><small>{{player.team.city}} {{player.team.name}}</small></small></p>
+      </div>
+
+
+      <div class="team-thats-up" ng-if="!player.firstName && !isDraftOver()">
+        <p>Next Team Picking</p>
+        <p class="team-name"><strong>{{teamThatsUp.name}}</strong></p>
+      </div>
+
+      <div class="team-thats-up" ng-if="isDraftOver()">
+        <p>DRAFT IS OVER</p>
+      </div>
+
+      <div class="recent-picks" ng-show="fantasyDraftPicks.length">
+        <center>10 Recent Picks</center>
+        <ul>
+          <li ng-repeat="fantasyDraftPick in fantasyDraftPicks | orderBy:'id':true | limitTo:10" >
+          <div class="pull-right price-paid">${{fantasyDraftPick.price}}</div>
+            <div class="player">
+              {{fantasyDraftPick.player.firstName}} {{fantasyDraftPick.player.lastName}}
+            </div>
+            <div class="team">
+              {{findFantasyTeamById(fantasyDraftPick.fantasyTeamId).name}}
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
   </div>
+
 </div>
-
-

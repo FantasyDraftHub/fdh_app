@@ -2,19 +2,21 @@
   <div class="container parallax-layer" data-opacity="true">
     <div class="media v-middle">
       <div class="media-body">
-        <i class="icon-football-1"></i><h1 class="text-white text-display-1 margin-v-0">Draft Board Manager Panel</h1>
+        <h1 class="text-white text-display-1 margin-v-0">
+          <a class="text-gray" ui-sref="auth.fantasy-drafts">
+            Fantasy Drafts</a>&nbsp;| Draft Board Manager Panel
+        </h1>
       </div>
     </div>
   </div>
 </div>
+
 
 <div class="container" ng-show="players">
   <div class="page-section">
     <div flash-message="5000"></div>
     <div class="row">
       <div class="col-md-6">
-
-
 
           <div class="panel panel-default paper-shadow">
             <div class="panel-heading">
@@ -31,33 +33,14 @@
                 </div>
                 <br />
                 <br />
-
-
                 <button ng-click="unSetOnTheBlock()" class="btn btn-danger btn-block">
                   Remove this player from the block
                 </button>
               </div>
 
               <div ng-if="!player.id">
-                <ui-select ng-model="fantasyDraft.playerId" title="Select Player">
-                  <ui-select-match placeholder="Select Player">
-                    {{$select.selected.firstName}} {{$select.selected.lastName}}
-                  </ui-select-match>
-
-                  <ui-select-choices repeat="player.id as player in players | orderBy:'lastName' | filter:query">
-                    <div ng-bind-html="player.lastName | highlight: $select.search"></div>
-                    <div>
-                      {{player.firstName}} {{player.lastName}}
-                    </div>
-                  </ui-select-choices>
-                </ui-select>
-
-                <br />
-                <button ng-click="setOnTheBlock()" class="btn btn-success btn-block">
-                  Set On The Block Player
-                </button>
+                <input type="text" ng-model="player" placeholder="Select Player" typeahead="player as player.name for player in availablePlayers | filter:{name:$viewValue}" class="form-control" typeahead-on-select="setOnTheBlock($item)">
               </div>
-
 
             </div>
           </div>
@@ -82,13 +65,11 @@
 
               <ui-select ng-model="fantasyDraftPick.fantasyTeam" title="Select Team">
                 <ui-select-match placeholder="Select Team">
-                  {{$select.selected.owner}} - {{$select.selected.name}}
+                  {{$select.selected.name}}
                 </ui-select-match>
 
-                <ui-select-choices repeat="fantasyTeam in fantasyTeams | orderBy:'owner' | filter:query">
-                  <div>
-                    {{fantasyTeam.owner}} {{fantasyTeam.name}}
-                  </div>
+                <ui-select-choices ui-disable-choice="isTeamDisabled(fantasyTeam)" repeat="fantasyTeam in fantasyTeams | orderBy:'name' | filter:query">
+                  {{fantasyTeam.name}}
                 </ui-select-choices>
               </ui-select>
 
@@ -104,7 +85,7 @@
               <br />
               <br />
 
-              <button ng-click="addDraftPick()" class="btn btn-primary btn-block">
+              <button ng-click="addDraftPick()" ng-show="fantasyDraftPick.price && fantasyDraftPick.fantasyTeam" class="btn btn-primary btn-block">
                 Add Draft Pick!
               </button>
             </div>
@@ -130,8 +111,7 @@
                 <th>Player</th>
                 <th>Price Paid</th>
                 <th>Team</th>
-                <th>Owner</th>
-                <th>Manage</th>
+                <th>Edit</th>
               </tr>
             </thead>
             <tbody>
@@ -139,8 +119,11 @@
                 <td>{{fantasyDraftPick.player.firstName}} {{fantasyDraftPick.player.lastName}}</td>
                 <td>{{fantasyDraftPick.price | currency}}</td>
                 <td>{{fantasyDraftPick.fantasyTeam.name}}</td>
-                <td>{{fantasyDraftPick.fantasyTeam.owner}} </td>
-                <td>Edit</td>
+                <td>
+                  <button ng-click="setDraftPickEdit(fantasyDraftPick)" data-toggle="modal" data-target="#modal-fantasy-draft-pick" class="btn btn-primary paper-shadow relative">
+                    Edit Pick
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -151,5 +134,48 @@
   </div>
 </div>
 
+<div class="modal grow modal-backdrop-white fade" id="modal-fantasy-draft-pick">
+  <div class="modal-dialog modal-md">
+    <div class="v-cell">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">Fantasy Draft Pick</h4>
+        </div>
+        <div class="modal-body">
+          <form>
 
+            <div class="form-group form-control-material">
+              <ui-select ng-model="editFantasyDraftPick.fantasyTeam" title="Select Team">
+                <ui-select-match placeholder="Select Team">
+                  {{$select.selected.owner}} - {{$select.selected.name}}
+                </ui-select-match>
+
+                <ui-select-choices repeat="fantasyTeam in fantasyTeams | orderBy:'owner' | filter:query">
+                  <div>
+                    {{fantasyTeam.owner}} {{fantasyTeam.name}}
+                  </div>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+
+            <div class="form-group form-control-material">
+              <input type="text" class="form-control" id="price" placeholder="Enter the price the team paid for this player" ng-model="editFantasyDraftPick.price" ng-class="{used: editFantasyDraftPick.price}">
+              <span class="ma-form-highlight"></span>
+              <span class="ma-form-bar"></span>
+              <label for="price">Price Paid:</label>
+            </div>
+
+            <button ng-click="updateFantasyDraftPick(editFantasyDraftPick)" class="btn btn-success btn-block paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
+              Save Draft Pick
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
