@@ -1,7 +1,6 @@
 module.exports = {
   vendorJs: [
     './bower_components/angular/angular.js',
-    './bower_components/angular-animate/angular-animate.js',
     './bower_components/angular-sanitize/angular-sanitize.js',
     './bower_components/angular-ui-router/release/angular-ui-router.min.js',
     './bower_components/angular-ui-utils/ui-utils.min.js',

@@ -1,5 +1,5 @@
 appModule = angular.module 'fantasyDraftHub',
-  ['ngAnimate', 'LocalStorageModule', 'ngSanitize', 'ui.router', 'ui.utils', 'ui.select', 'ui.sortable', 'flash', 'angular-repeat-n', 'doowb.angular-pusher', 'ngFitText', 'ui.bootstrap']
+  ['LocalStorageModule', 'ngSanitize', 'ui.router', 'ui.utils', 'ui.select', 'ui.sortable', 'flash', 'angular-repeat-n', 'doowb.angular-pusher', 'ngFitText', 'ui.bootstrap']
 
 appModule.config ($stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceProvider, PusherServiceProvider) ->
 
