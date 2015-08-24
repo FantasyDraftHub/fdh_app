@@ -17,8 +17,6 @@ module.exports = {
     './bower_components/angular-breadcrumb/release/angular-breadcrumb.js',
     './bower_components/angular-flash-alert/dist/angular-flash.min.js',
     './bower_components/angular-repeat-n/dist/angular-repeat-n.min.js',
-    './bower_components/angular-auto-height/dist/auto-height.js',
-    './bower_components/pusher/dist/pusher.min.js',
     './bower_components/angular-pusher/angular-pusher.min.js',
     './bower_components/ngFitText/src/ng-FitText.js',
     './bower_components/underscore/underscore-min.js'

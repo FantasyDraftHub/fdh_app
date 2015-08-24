@@ -4,6 +4,7 @@ dist
 .sass-cache
 bower_components
 build-test
+build-production
 build-dev
 build
 tmp/
