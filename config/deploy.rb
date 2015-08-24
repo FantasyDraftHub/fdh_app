@@ -14,7 +14,7 @@ task :precompile do
   run_locally do
     Dir.chdir fetch(:rsync_stage) do
       execute :npm, :install, '--quiet', '--production'
-      execute :bower, :install, '--force'
+      execute :bower, :install
       execute :gulp, :build, "--env #{ENV.fetch('BUILD_ENV')}"
       execute :mkdir, '-p', 'dist'
       execute :cp, '-r', "build-#{ENV.fetch('BUILD_ENV')}/*", 'dist/'
