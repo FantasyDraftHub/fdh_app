@@ -4,7 +4,7 @@ module.exports = {
     env: 'dev'
   },
   production: {
-    apiUrl: 'http://fantasydrafthub.com',
+    apiUrl: 'http://api.fantasydrafthub.com',
     env: 'production'
   }
 };
