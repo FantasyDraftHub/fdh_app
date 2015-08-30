@@ -8,6 +8,7 @@ body.draftBoard{
   width:100%;
   // font-family: 'Graduate';
   font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
   background-color: #00A651;
 
   .draft-board{
@@ -36,7 +37,6 @@ body.draftBoard{
           text-align: center;
           line-height: 24px;
           font-size:20px;
-          font-weight: 300;
           height: 55px;
           word-spacing: 9999999px;
         }
