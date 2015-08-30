@@ -23,7 +23,7 @@ body.draftBoard{
 
       .fantasy-team{
         position: relative;
-        height: 130px;
+        height: 125px;
         background-color: #fff;
         border: 1px solid #999;
         -webkit-border-radius: 5px;
@@ -41,28 +41,19 @@ body.draftBoard{
           word-spacing: 9999999px;
         }
         .total-spent{
-          font-size:14px;
-          strong{
-
-          }
+          font-size:16px;
         }
         .total-left{
-          font-size:14px;
-          strong{
-
-          }
+          font-size:16px;
         }
         .max-bid{
-          font-size:14px;
-          strong{
-
-          }
+          font-size:16px;
         }
       }
 
       .draft-picks{
         margin-top: 10px;
-        height: 100px;
+        height: 90px;
         ul{
           list-style-type: none;
           margin: 0;
