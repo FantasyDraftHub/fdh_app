@@ -6,8 +6,8 @@ body.draftBoard{
   padding:0;
   height:100%;
   width:100%;
-  font-family: 'Graduate';
-  // background: url('/images/field.svg') top no-repeat;
+  // font-family: 'Graduate';
+  font-family: 'Open Sans', sans-serif;
   background-color: #00A651;
 
   .draft-board{
@@ -43,19 +43,19 @@ body.draftBoard{
         .total-spent{
           font-size:14px;
           strong{
-            font-family: Tahoma
+
           }
         }
         .total-left{
           font-size:14px;
           strong{
-            font-family: Tahoma
+
           }
         }
         .max-bid{
           font-size:14px;
           strong{
-            font-family: Tahoma
+
           }
         }
       }
