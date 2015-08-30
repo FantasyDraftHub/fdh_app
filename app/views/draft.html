@@ -69,7 +69,7 @@
                   </div>
                 </div>
               </li>
-              <li class="blank" ng-repeat-n="{{fantasyDraft.rounds - fantasyTeam.fantasyDraftPicks.length}}">empty</span>
+              <li class="blank" ng-hide="fantasyTeam.fantasyDraftPicks.length == fantasyDraft.rounds" ng-repeat-n="{{fantasyDraft.rounds - fantasyTeam.fantasyDraftPicks.length}}">empty</span>
             </ul>
           </div>
 
