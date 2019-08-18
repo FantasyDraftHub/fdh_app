@@ -4,6 +4,7 @@ angular.module 'fantasyDraftHub'
       id: localStorageService.get 'id'
       token: localStorageService.get 'token'
     create: (data) ->
+      console.log('seession')
       localStorageService.set 'id', data.id
       localStorageService.set 'token', data.token
     destroy: ->

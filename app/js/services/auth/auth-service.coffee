@@ -3,6 +3,7 @@ angular.module 'fantasyDraftHub'
     login: (creds) ->
       $http.post(APP_CONSTANTS.apiUrl+'/sessions', creds)
       .success (data) ->
+        console.log(data)
         sessionService.create data
     logout: ->
       $http.post(APP_CONSTANTS.apiUrl+'/sessions/logout', {})

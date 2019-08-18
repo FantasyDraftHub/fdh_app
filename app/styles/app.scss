@@ -1,6 +1,18 @@
 @import "essentials", "layout", "navbar", "colors-background", "colors-buttons", "colors-text", "colors-alerts", "colors-progress-bars", "material", "main";
 
+@keyframes shadow-pulse
+{
+  0% {
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 5px 15px rgb(247, 143, 143);
+  }
+}
 
+.pulse{
+  animation: shadow-pulse 1s infinite;
+}
 body.draftBoard{
   margin:0;
   padding:0;
@@ -11,6 +23,7 @@ body.draftBoard{
   font-weight: 600;
   background-color: #00A651;
   overflow-x: hidden;
+  background: url('../images/champion.png') top center no-repeat #00A651;
 
   .draft-board{
     margin:0;

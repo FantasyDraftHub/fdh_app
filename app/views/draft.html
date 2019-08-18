@@ -25,14 +25,14 @@
   </div>
 </div>
 
-<div class="fluid-container" ng-if="enableFantasyBoard">
+<div class="fluid-container the-board" ng-if="enableFantasyBoard">
   <div class="row">
     <div class="col-md-10" style="width:90%">
 
       <div class="draft-board">
         <div class="fantasy-team-column" ng-repeat="fantasyTeam in fantasyTeams" ng-style="{'width': calculateColumnWidth()}">
 
-          <div class="fantasy-team effect5">
+          <div class="fantasy-team effect5" ng-class="{pulse: teamThatsUp.name == fantasyTeam.name}">
             <div class="name">
               {{fantasyTeam.name}}
             </div>
@@ -96,15 +96,15 @@
       </div>
 
       <div class="recent-picks" ng-show="fantasyDraftPicks.length">
-        <center>10 Recent Picks</center>
+        <center>20 Recent Picks</center>
         <ul>
-          <li ng-repeat="fantasyDraftPick in fantasyDraftPicks | orderBy:'id':true | limitTo:10" >
+          <li ng-repeat="fantasyDraftPick in fantasyDraftPicks | orderBy:'id':true | limitTo:20" >
           <div class="pull-right price-paid">${{fantasyDraftPick.price}}</div>
             <div class="player">
               {{fantasyDraftPick.player.firstName}} {{fantasyDraftPick.player.lastName}}
             </div>
             <div class="team">
-              {{findFantasyTeamById(fantasyDraftPick.fantasyTeamId).name}}
+              {{fantasyDraftPick.player.position.key}} | {{findFantasyTeamById(fantasyDraftPick.fantasyTeamId).name}}
             </div>
           </li>
         </ul>
