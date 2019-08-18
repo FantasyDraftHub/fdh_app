@@ -1,12 +1,7 @@
 angular.module 'fantasyDraftHub'
   .controller 'draftController', ($scope, $state, $stateParams, $http, APP_CONSTANTS, Pusher) ->
     $scope.enableFantasyBoard = true
-    $scope.password = 'board'
-
-    # $scope.enableFantasyBoard = false
-    # $scope.password = ''
-
-    $scope.passwordError = ''
+    $scope.loading = true
     $scope.fantasyDraft = {}
     $scope.fantasyTeams = []
     $scope.fantasyDraftPicks = []
@@ -73,32 +68,13 @@ angular.module 'fantasyDraftHub'
 
         $scope.player = $scope.findPlayerById(data.playerId)
 
-
-        if $scope.fantasyDraft.id
-          $scope.enableFantasyBoard = true
-          $scope.passwordError = ''
-          $scope.password = ''
-        else
-          $scope.password = ''
-          $scope.enableFantasyBoard = false
-          $scope.passwordError = 'The password does not match the password for this Draft Board.'
-
-
     $scope.findPlayerById = (playerId) ->
-      tempPlayer = null
-      $scope.players.forEach (player, index) ->
-        if parseInt(player.id) == parseInt(playerId)
-          tempPlayer = player
-        return
-      tempPlayer
+      $scope.players.find (player) ->
+        parseInt(player.id) == parseInt(playerId)
 
     $scope.findFantasyTeamById = (fantasyTeamId) ->
-      tempFantasyTeam = null
-      $scope.fantasyTeams.forEach (fantasyTeam, index) ->
-        if parseInt(fantasyTeam.id) == parseInt(fantasyTeamId)
-          tempFantasyTeam = fantasyTeam
-        return
-      tempFantasyTeam
+      $scope.fantasyTeams.find (fantasyTeam) ->
+        parseInt(fantasyTeam.id) == parseInt(fantasyTeamId)
 
     $scope.buildFantasyDraftPicks = ->
       $scope.fantasyTeams.forEach (fantasyTeam, fantasyTeamIndex) ->
@@ -121,13 +97,15 @@ angular.module 'fantasyDraftHub'
         0
       else
         ($scope.fantasyDraft.max - $scope.calculateTeamTotalSpent(fantasyTeam) - ($scope.fantasyDraft.rounds - fantasyTeam.fantasyDraftPicks.length)) + 1
+
     $scope.whosPick = ->
       $scope.teamThatsUp = $scope.findFantasyTeamById($scope.fantasyDraft.fantasyTeamId)
+
     $scope.calculateColumnWidth = ->
       (100 / $scope.fantasyTeams.length)+'%'
+
     $scope.isDraftOver = ->
       $scope.fantasyDraftPicks.length == ($scope.fantasyDraft.rounds * $scope.fantasyTeams.length)
-
 
     if $scope.enableFantasyBoard
       $scope.init()

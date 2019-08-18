@@ -1,31 +1,4 @@
-<div class="modal modal-backdrop-white" ng-class="{show: !enableFantasyBoard}" id="modal-password">
-  <div class="modal-dialog modal-md">
-    <div class="v-cell">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title text-center">Enter Draft Password</h4>
-        </div>
-        <div class="modal-body">
-          {{passwordError}}
-          <form>
-
-            <div class="form-group form-control-material">
-              <input type="text" class="form-control" id="name" placeholder="Enter the password for this draft board." ng-model="password">
-              <label for="name">Password</label>
-            </div>
-
-            <button ng-click="loadDraftBoard()" class="btn btn-success btn-block paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated data-dismiss="modal">
-              Go To Draft Board!
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="fluid-container the-board" ng-if="enableFantasyBoard">
+<div class="fluid-container the-board" ng-if="!loading">
   <div class="row">
     <div class="col-md-10" style="width:90%">
 
@@ -112,5 +85,21 @@
 
     </div>
   </div>
+
+</div>
+
+<div class="fluid-container loading-page" ng-if="loading">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <center><img src="../images/loading.gif" alt=""></center>
 
 </div>
